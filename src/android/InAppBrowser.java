@@ -363,7 +363,7 @@ public class InAppBrowser extends CordovaPlugin {
                     if (key.equalsIgnoreCase(CLOSE_BUTTON_CAPTION)) {
                         this.buttonLabel = val;
                     }
-                    Boolean value = option.nextToken().equals("no") ? Boolean.FALSE : Boolean.TRUE;
+                    Boolean value = val.equals("no") ? Boolean.FALSE : Boolean.TRUE;
                     map.put(key, value);
                 }
             }
