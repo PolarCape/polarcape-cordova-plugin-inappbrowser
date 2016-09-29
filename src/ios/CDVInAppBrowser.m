@@ -795,10 +795,6 @@
 
 - (void)navigateTo:(NSURL*)url
 {
-    NSURLRequest* request = [NSURLRequest requestWithURL:url];
-	
-     NSURLRequest* request = [NSURLRequest requestWithURL:url];
-     //NSURLRequest* request = [NSURLRequest requestWithURL:url];
  
      NSMutableURLRequest* request = [[NSMutableURLRequest alloc] initWithURL:url];
  
@@ -815,21 +811,21 @@
      }
  }
  
-    (void)navigateToNew:(NSURL*)url headers:(NSString*)headers
+-(void)navigateToNew:(NSURL*)url headers:(NSString*)headers
  {
-     //NSURLRequest* request = [NSURLRequest requestWithURL:url];
  
      NSMutableURLRequest* request = [[NSMutableURLRequest alloc] initWithURL:url];
- 
-     //[request setValue:@"1" forHTTPHeaderField:@"horror"];
-     NSArray* pairs = [headers componentsSeparatedByString:@","];
- 
-     for (NSString* pair in pairs) {
-         NSArray* keyvalue = [pair componentsSeparatedByString:@":"];
-         NSString* key = [[keyvalue objectAtIndex:0] lowercaseString];
-         NSString* value = [keyvalue objectAtIndex:1];
-         [request setValue:value forHTTPHeaderField:key];
-     }
+	 
+	 if(![headers isEqualToString:@""]){
+		 NSArray* pairs = [headers componentsSeparatedByString:@","];
+	 
+		 for (NSString* pair in pairs) {
+			 NSArray* keyvalue = [pair componentsSeparatedByString:@":"];
+			 NSString* key = [[keyvalue objectAtIndex:0] lowercaseString];
+			 NSString* value = [keyvalue objectAtIndex:1];
+			 [request setValue:value forHTTPHeaderField:key];
+		 }
+	 }
 
     if (_userAgentLockToken != 0) {
         [self.webView loadRequest:request];

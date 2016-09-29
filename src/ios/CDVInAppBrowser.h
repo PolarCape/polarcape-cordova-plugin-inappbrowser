@@ -39,6 +39,8 @@
 - (void)open:(CDVInvokedUrlCommand*)command;
 - (void)close:(CDVInvokedUrlCommand*)command;
 - (void)injectScriptCode:(CDVInvokedUrlCommand*)command;
+- (void)navigateTo:(NSURL*)url;
+- (void)navigateToNew:(NSURL*)url headers:(NSString*)headers;
 - (void)show:(CDVInvokedUrlCommand*)command;
 
 @end
