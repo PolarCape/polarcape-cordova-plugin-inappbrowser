@@ -139,7 +139,7 @@ instance, or the system browser.
     - __hardwareback__: works the same way as on Android platform.
 - __headers__: Optional, defaulting to: `""`. _(String)_
 	Headers string must not contain any blank space, and each header's name/value pairs must be separated by a comma
-	_(Ex.)_ "'Authorization:Bearer s3JnE2ef8Qq8SJ4F2Sbv,MYUPCAPP_AGENT:ANDROID'"
+	- __Example__  "'Authorization:Bearer s3JnE2ef8Qq8SJ4F2Sbv,MYUPCAPP_AGENT:ANDROID'"
 
 ### Supported Platforms
 
