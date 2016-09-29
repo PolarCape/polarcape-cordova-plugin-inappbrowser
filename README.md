@@ -87,7 +87,7 @@ simply hook `window.open` during initialization.  For example:
 Opens a URL in a new `InAppBrowser` instance, the current browser
 instance, or the system browser.
 
-    var ref = cordova.InAppBrowser.open(url, target, options);
+    var ref = cordova.InAppBrowser.open(url, target, options, headers);
 
 - __ref__: Reference to the `InAppBrowser` window when the target is set to `'_blank'`. _(InAppBrowser)_
 
@@ -137,6 +137,9 @@ instance, or the system browser.
     - __hidden__: set to `yes` to create the browser and load the page, but not show it. The loadstop event fires when loading is complete. Omit or set to `no` (default) to have the browser open and load normally.
     - __fullscreen__: set to `yes` to create the browser control without a border around it. Please note that if __location=no__ is also specified, there will be no control presented to user to close IAB window.
     - __hardwareback__: works the same way as on Android platform.
+- __headers__: Optional, defaulting to: `""`. _(String)_
+	Headers string must not contain any blank space, and each header's name/value pairs must be separated by a comma
+	_(Ex.)_ "'Authorization:Bearer s3JnE2ef8Qq8SJ4F2Sbv,MYUPCAPP_AGENT:ANDROID'"
 
 ### Supported Platforms
 
