@@ -39,8 +39,6 @@
 - (void)open:(CDVInvokedUrlCommand*)command;
 - (void)close:(CDVInvokedUrlCommand*)command;
 - (void)injectScriptCode:(CDVInvokedUrlCommand*)command;
-- (void)navigateTo:(NSURL*)url;
-- (void)navigateToNew:(NSURL*)url headers:(NSString*)headers;
 - (void)show:(CDVInvokedUrlCommand*)command;
 
 @end
@@ -98,6 +96,7 @@
 
 - (void)close;
 - (void)navigateTo:(NSURL*)url;
+- (void)navigateToNew:(NSURL*)url headers:(NSString*)headers;
 - (void)showLocationBar:(BOOL)show;
 - (void)showToolBar:(BOOL)show : (NSString *) toolbarPosition;
 - (void)setCloseButtonTitle:(NSString*)title;
