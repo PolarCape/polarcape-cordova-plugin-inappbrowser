@@ -244,6 +244,30 @@
     });
 }
 
+- (void)hide:(CDVInvokedUrlCommand*)command
+{
+    if (self.inAppBrowserViewController == nil) {
+        NSLog(@"Tried to hide IAB after it was closed.");
+        return;
+
+
+    }
+    if (_previousStatusBarStyle == -1) {
+        NSLog(@"Tried to hide IAB while already hidden");
+        return;
+    }
+
+    _previousStatusBarStyle = [UIApplication sharedApplication].statusBarStyle;
+
+    // Run later to avoid the "took a long time" log message.
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if (self.inAppBrowserViewController != nil) {
+            _previousStatusBarStyle = -1;
+            [self.viewController dismissViewControllerAnimated:YES completion:nil];
+        }
+    });
+}
+
 - (void)openInCordovaWebView:(NSURL*)url withOptions:(NSString*)options
 {
     NSURLRequest* request = [NSURLRequest requestWithURL:url];
@@ -256,7 +280,7 @@
     if ([self.commandDelegate URLIsWhitelisted:url]) {
         [self.webView loadRequest:request];
     } else { // this assumes the InAppBrowser can be excepted from the white-list
-        [self openInInAppBrowser:url withOptions:options withHeaders:@""];
+        [self openInInAppBrowser:url withOptions:options];
     }
 #endif
 }
@@ -560,7 +584,7 @@
     self.toolbar.alpha = 1.000;
     self.toolbar.autoresizesSubviews = YES;
     self.toolbar.autoresizingMask = toolbarIsAtBottom ? (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin) : UIViewAutoresizingFlexibleWidth;
-    self.toolbar.barStyle = UIBarStyleDefault;
+    self.toolbar.barStyle = UIBarStyleBlackOpaque;
     self.toolbar.clearsContextBeforeDrawing = NO;
     self.toolbar.clipsToBounds = NO;
     self.toolbar.contentMode = UIViewContentModeScaleToFill;
