@@ -43,6 +43,11 @@ exports.defineAutoTests = function () {
 
     describe('open method', function () {
 
+        if (cordova.platformId == 'osx') {
+            pending('Open method not fully supported on OSX.');
+            return;
+        }
+
         var iabInstance;
         var originalTimeout;
         var url = 'https://dist.apache.org/repos/dist/dev/cordova/';
@@ -93,6 +98,7 @@ exports.defineAutoTests = function () {
             expect(iabInstance.removeEventListener).toEqual(jasmine.any(Function));
             expect(iabInstance.close).toEqual(jasmine.any(Function));
             expect(iabInstance.show).toEqual(jasmine.any(Function));
+            expect(iabInstance.hide).toEqual(jasmine.any(Function));
             expect(iabInstance.executeScript).toEqual(jasmine.any(Function));
             expect(iabInstance.insertCSS).toEqual(jasmine.any(Function));
         });
@@ -416,7 +422,9 @@ exports.defineManualTests = function (contentEl, createActionButton) {
         '<p/> <div id="closeHidden"></div>' +
         'Expected result: no output. But click on "show hidden" again and nothing should be shown.' +
         '<p/> <div id="openHiddenShow"></div>' +
-        'Expected result: open successfully in InAppBrowser to https://www.google.co.uk';
+        'Expected result: open successfully in InAppBrowser to https://www.google.co.uk' +
+        '<p/> <div id="openVisibleAndHide"></div>' +
+        'Expected result: open successfully in InAppBrowser to https://www.google.co.uk. Hide after 2 seconds';
 
     var clearing_cache_tests = '<h1>Clearing Cache</h1>' +
         '<div id="openClearCache"></div>' +
@@ -615,6 +623,12 @@ exports.defineManualTests = function (contentEl, createActionButton) {
     createActionButton('google.co.uk Not Hidden', function () {
         openHidden('https://www.google.co.uk', false);
     }, 'openHiddenShow');
+    createActionButton('google.co.uk shown for 2 seconds than hidden', function () {
+        var iab = doOpen('https://www.google.co.uk/', 'random_sting');
+        setTimeout(function () {
+            iab.hide();
+        }, 2000);
+    }, 'openVisibleAndHide');
 
     //Clearing cache
     createActionButton('Clear Browser Cache', function () {
